@@ -1,0 +1,15 @@
+<h1 class="title">New Post</h1>
+
+<%= form_for @blog do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <br>
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <br>
+  <%= f.submit %>
+<% end %>

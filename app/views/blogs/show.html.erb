@@ -1,0 +1,30 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h2 class="card-title">Topic: <%= @blog.title %></h2>
+    <p class="card-text">Published on <%= @blog.publication_date.strftime('%B %e, %Y') %></p>
+    <h3>Content:</h3>
+    <p class="card-text"><%= truncate(@blog.content, length: 150) %></p>
+  </div>
+</div>
+
+<% if user_signed_in? %>
+  <%= form_for([@blog, @blog.comments.build]) do |f| %>
+    <%= f.text_area :content, placeholder: 'Write your comment here' %>
+    <br>
+    <%= f.submit 'Post Comment' %>
+  <% end %>
+<% end %>
+
+<h3>Comments</h3>
+<div class="card-title">
+<% if @blog.comments.any? %> 
+  <% @blog.comments.each do |comment| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><# %= comment.user.email %></h5>
+        <h5 class="card-title"><# %= comment %></h5>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+</div>

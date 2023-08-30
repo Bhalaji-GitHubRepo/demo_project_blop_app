@@ -7,8 +7,12 @@ class BlogsController < ApplicationController
     if params[:search]
       @blogs = Blog.where('title LIKE ? OR content LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").paginate(page: params[:page], per_page: 10)
     else
-      @blogs = Blog.paginate(page: params[:page], per_page: 10)
+      @blogs = Blog.all.paginate(page: params[:page], per_page: 10)
     end
+  end
+
+  # GET /blogs/1
+  def show
   end
 
   # GET /blogs/new
@@ -24,18 +28,12 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to @blog
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
-  end
-
-  # GET /blogs/1
-  def show
-    @blog
   end
 
   # GET /blogs/1/edit
   def edit
-    @blog
   end
 
   # PATCH/PUT /blogs/1
@@ -43,24 +41,26 @@ class BlogsController < ApplicationController
     if @blog.update(blog_params)
       redirect_to @blog
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /blogs/1
   def destroy
     @blog.destroy
-    redirect_to blogs_url
+    redirect_to root_path
   end
 
   private
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :publication_date)
+    params.require(:blog).permit(:title, :content)
   end
 
   def set_blog
     @blog = Blog.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path
   end
 
 end

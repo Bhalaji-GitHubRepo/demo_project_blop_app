@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Blog Posts</h1>
 
 <%= form_tag blogs_path, method: :get, class: 'form-inline mb-3' do %>
@@ -9,14 +10,13 @@
   </div>
 <% end %>
 
-<%= link_to 'New Post', new_blog_path, class: 'btn btn-primary mb-3' %>
-
 <% @blogs.each do |blog_post| %>
   <div class="card mb-3">
     <div class="card-body">
-      <h5 class="card-title"><%= link_to blog_post.title, blog_post %></h5>
+      <h2 class="card-title p-2 rounded bg-gray-100 text-gray-900"><%= link_to blog_post.title, blog_post %></h2>
       <p class="card-text"><%= truncate(blog_post.content, length: 150) %></p>
-      <p class="card-text">Published on <%= blog_post.publication_date.strftime('%B %e, %Y') %></p>
+      <p class="card-text">Published on: <%= blog_post.publication_date.strftime('%B %e, %Y') %></p>
     </div>
   </div>
 <% end %>
+</div>

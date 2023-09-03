@@ -28,7 +28,7 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to @blog
     else
-      render :new, status: :unprocessable_entity
+      render :new, alert: @blog.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
 
@@ -41,7 +41,7 @@ class BlogsController < ApplicationController
     if @blog.update(blog_params)
       redirect_to @blog
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, alert: @blog.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
 

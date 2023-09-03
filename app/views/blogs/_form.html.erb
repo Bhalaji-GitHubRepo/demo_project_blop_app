@@ -2,7 +2,7 @@
   <% if form.object.errors.any? %>
     <div>
       <% form.object.errors.full_messages.each do |message| %>
-        <div><%= message %></div>
+        <div class="alert alert-warning"><%= message %></div>
       <% end %>
     </div>
   <% end %>

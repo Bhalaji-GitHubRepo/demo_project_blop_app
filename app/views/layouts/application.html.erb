@@ -11,23 +11,38 @@
   </head>
 
   <body>
-    <p class="notics"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-extend">
       <div class="container">
-        <p>
-          <%= link_to 'Homepage', root_path, class: 'btn btn-primary mb-3' %>
-            <% if user_signed_in? %>
-                <%= link_to 'New Blog Post', new_blog_path, class: 'btn btn-primary mb-3' %>
-                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-primary mb-3' %>
-            <% elsif include_navbar? %>
-                <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary mb-3' %>
-                <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary mb-3' %>
-            <% end %>
-        </p>
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/">Blog App</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><%= link_to 'Homepage', root_path%></li>
+                <% if user_signed_in? %>
+                    <li><%= link_to 'Create New Blog', new_blog_path %></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-secondary btn-sm navbar-right-logout' %></li>
+                  </ul>
+                <% elsif include_navbar? %>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-secondary' %></li>
+                    <li><%= link_to 'Login', new_user_session_path, class: 'btn btn-secondary' %></li>
+                  </ul>
+                <% end %>
+            </div>
+          </nav>
       </div>
     </nav>
+    <% if notice.present? %>
+      <p class="container alert alert-success alert-extend"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="container alert alert-warning alert-extend"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

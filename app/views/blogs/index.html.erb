@@ -1,22 +1,26 @@
 <div class="container">
-<h1>Blog Posts</h1>
+  <h1>Blog Posts
+    <%= form_tag blogs_path, method: :get, class: 'form-inline mb-3 navbar-right navbar-right-search' do %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by title or content' %>
+      <%= submit_tag 'Search', class: 'btn btn-success' %>
+    <% end %>
+  </h1>
 
-<%= form_tag blogs_path, method: :get, class: 'form-inline mb-3' do %>
-  <div class="input-group">
-    <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by title or content' %>
-    <div class="input-group-append">
-      <%= submit_tag 'Search', class: 'btn btn-outline-secondary' %>
+  <% unless @blogs.any? %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h3 class="card-text">No Blogs found.. Try Creating New..</h3>
+      </div>
     </div>
-  </div>
-<% end %>
-
-<% @blogs.each do |blog_post| %>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h2 class="card-title p-2 rounded bg-gray-100 text-gray-900"><%= link_to blog_post.title, blog_post %></h2>
-      <p class="card-text"><%= truncate(blog_post.content, length: 150) %></p>
-      <p class="card-text">Published on: <%= blog_post.publication_date.strftime('%B %e, %Y') %></p>
-    </div>
-  </div>
-<% end %>
+  <% else %>
+    <% @blogs.each do |blog_post| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title p-2 rounded bg-gray-100 text-gray-900"><%= link_to blog_post.title, blog_post %></h2>
+          <p class="card-text"><%= truncate(blog_post.content, length: 150) %></p>
+          <p class="card-text">Published on: <%= blog_post.publication_date.strftime('%B %e, %Y') %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

@@ -66,3 +66,4 @@ gem 'annotate'
 
 gem 'bulma-rails'
 gem 'simple_form'
+gem 'bootstrap'

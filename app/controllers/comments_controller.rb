@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @blog
     else
-      redirect_to @blog, alert: 'Failed to create comment.'
+      redirect_to @blog, alert: @comment.errors.full_messages.join(", "), status: :unprocessable_entity
     end
   end
   
@@ -21,6 +21,6 @@ class CommentsController < ApplicationController
   end
   
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:comment)
   end
 end

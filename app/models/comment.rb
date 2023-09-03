@@ -23,5 +23,5 @@ class Comment < ApplicationRecord
   belongs_to :blog
   belongs_to :user
 
-  validates :comment, presence: { message: "cannot be blank" }
+  validates :comment, presence: true
 end

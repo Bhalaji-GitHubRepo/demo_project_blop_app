@@ -1,10 +1,10 @@
 <div class="card mb-3">
   <div class="container">
     <% if user_signed_in? && @blog.user.id == current_user.id %>
-    <p>
-      <%= link_to "Edit", edit_blog_path(@blog), class: 'btn btn-primary mb-3' %>
-      <%= button_to "Delete", @blog, method: :delete,  class: 'btn btn-primary mb-3' %>
-    </p>
+      <div class="row">
+        <div class="col-sm-1"><%= link_to "Edit", edit_blog_path(@blog), class: 'btn btn-primary' %></div>
+        <div class="col-sm-1"><%= button_to "Delete", @blog, method: :delete,  class: 'btn btn-danger' %></div>
+      </div>
     <% end %>
     <h2 class="card-title">Title: <%= @blog.title %></h2>
     <h4>Author: <%= @blog.user.email %></h4>

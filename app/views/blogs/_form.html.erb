@@ -8,14 +8,21 @@
   <% end %>
 
   <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <div>
+      <h4><%= form.label :title %></h4>
+    </div>
+    <div>
+      <%= form.text_field :title, style: 'width: 60%', required: true %>
+    </div>
   </div>
   <br>
   <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <div>
+      <h4><%= form.label :content %></h4>
+    </div>
+    <div>
+      <%= form.text_area :content, style: 'width: 60%', rows: 10, required: true %>
+    </div>
   </div>
-  <br>
-  <%= form.submit %>
+  <%= form.button :submit, class: "btn btn-primary" %>
 <% end %>
